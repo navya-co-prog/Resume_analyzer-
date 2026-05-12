@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resume Analyzer Result</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f4f6f8;
+            text-align: center;
+        }
+
+        .container {
+            width: 50%;
+            margin: 50px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .progress {
+            width: 100%;
+            background: #ddd;
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .progress-bar {
+            height: 25px;
+            
+            background: linear-gradient(to right, #4CAF50, #2196F3);
+            color: white;
+            text-align: center;
+            line-height: 25px;
+            font-weight: bold;
+        }
+
+        .matched {
+            color: green;
+        }
+
+        .missing {
+            color: red;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #2196F3;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .btn:hover {
+            background: #0b7dda;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Resume Analysis Result</h1>
+
+    <div class="progress">
+        <div class="progress-bar">{{score}}%</div>
+    </div>
+     {% if score >= 75 %}
+    <p style="color: green;"><b>Great match! You are ready to apply.</b></p>
+     {% elif score >= 50 %}
+     <p style="color: orange;"><b>Good, but you can improve your skills.</b></p>
+      {% else %}
+     <p style="color: red;"><b>Low match. Try improving your skills before applying.</b></p>
+     {% endif %}
+    <h3 class="matched">Matched Skills</h3>
+    <p>{{ matched | join(', ') }}</p>
+
+    <h3 class="missing">Missing Skills</h3>
+    <p>{{ missing | join(', ') }}</p>
+    <h3>Suggestions</h3>
+    
+    <p>
+    To improve your chances, focus on learning:
+    <b>{{ missing | join(', ') }}</b>
+   </p>
+
+    <a href="/" class="btn">Analyze Another Resume</a>
+</div>
+
+</body>
+</html>
